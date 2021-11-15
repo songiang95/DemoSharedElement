@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.demosharedelement.CustomConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BlankFragment1">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.example.demosharedelement.CustomFrameLayout
-        android:id="@+id/view"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:background="#ff0000"
-        android:transitionName="xxx"
-        android:transitionGroup="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <com.example.demosharedelement.TabImageView
+        android:id="@+id/tab_name"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:transitionName="shared_tab_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="matrix"/>
 
-        <View
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom|end"
-            android:background="#000000" />
-
-    </com.example.demosharedelement.CustomFrameLayout>
-
-</com.example.demosharedelement.CustomConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout >

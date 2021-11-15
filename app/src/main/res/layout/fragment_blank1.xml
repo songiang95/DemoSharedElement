@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.demosharedelement.TransitionConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DBDBDB"
     tools:context=".BlankFragment1">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DBDBDB"/>
 
-    <!-- TODO: Update blank fragment layout -->
-    <Button
+    <TextView
         android:id="@+id/action_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:text="go to fragment 2"
-        android:transitionName="yyy" />
+        android:background="@color/purple_500"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:padding="10dp"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World"
+        android:textSize="35dp"
+        android:textColor="#00ffff"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</com.example.demosharedelement.TransitionConstraintLayout>

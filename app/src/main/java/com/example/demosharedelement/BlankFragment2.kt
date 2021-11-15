@@ -17,22 +17,17 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BlankFragment2 : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private lateinit var tabImageView : TabImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
         val transition = android.transition.TransitionInflater.from(
             context
         ).inflateTransition(R.transition.image_shared_element_transition)
-        sharedElementEnterTransition = MoveWithScaleAndTranslation().apply {
+        sharedElementEnterTransition = ChangeBoundsTransition().apply {
+            duration = 2000
+        }/*MoveWithScaleAndTranslation().apply {
             duration = 5000
-        }
+        }*/
 
 
     }
@@ -42,26 +37,9 @@ class BlankFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank2, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment1.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BlankFragment1().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val view =  inflater.inflate(R.layout.fragment_blank2, container, false)
+        tabImageView = view.findViewById(R.id.tab_name)
+        tabImageView.setImageDrawable(BlankFragment1.SHARED_TAB_IMAGE)
+        return view
     }
 }

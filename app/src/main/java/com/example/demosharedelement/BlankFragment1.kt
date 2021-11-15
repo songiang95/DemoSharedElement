@@ -1,5 +1,9 @@
 package com.example.demosharedelement
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,19 +22,8 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BlankFragment1 : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    private lateinit var action: Button
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var action: View
+    private lateinit var translationConstraintLayout: TransitionConstraintLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,12 +36,20 @@ class BlankFragment1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         action = view.findViewById(R.id.action_btn)
+        translationConstraintLayout = view.findViewById(R.id.screen)
         action.setOnClickListener {
+            if (SHARED_TAB_IMAGE == null) {
+                val fragmentView = requireView()
+                val bitmap = Bitmap.createBitmap(fragmentView.width, fragmentView.height, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bitmap)
+                view.draw(canvas)
+                SHARED_TAB_IMAGE = BitmapDrawable(resources, bitmap)
+            }
 
             requireActivity().supportFragmentManager.beginTransaction()
                 .addSharedElement(
-                    action,
-                    "xxx"
+                    translationConstraintLayout.getSharedImageView(),
+                    "shared_tab_name"
                 )
                 .replace(R.id.container, BlankFragment2())
                 .addToBackStack(null)
@@ -57,22 +58,6 @@ class BlankFragment1 : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment1.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BlankFragment1().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        var SHARED_TAB_IMAGE: Drawable? = null
     }
 }
